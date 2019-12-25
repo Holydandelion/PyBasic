@@ -1,25 +1,36 @@
 
 
-# iterate a dict
-D1 = {'name':'John', 'number':'001', 'job':'unkown'}
-for item in D1.items():
-    print(item)
+class Reverse:
+    """Iterator for looping over a sequence backwards."""
+    def __init__(self, data):
+        self.data = data
+        self.index = len(data)
 
-# iterate a list
-L1 = ['a', 'bbb', 'ccc']
-for item in enumerate(L1):
-    print(item)
 
-# reverse iterate a sequence
-L2 = [1, 2, 3, 4, 5]
-for i in reversed(L2):
-    print(i)
+    # can simply return the instance itself
+    def __iter__(self):
+        return self
 
-print(L2)   # L2 is not changed.
+    """
+    def __next__(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index = self.index - 1
+        return self.data[self.index]
+        
+    """
 
-#  iterate a soreted sequence copy
-L3 = [6, 2, 1, 3, 4, 5]
-for i in sorted(L3, reverse=True):
-    print(i)
+obj = Reverse('abcded')
+print("iter(obj) is:{0}".format(iter(obj)))
 
-print(L3)   # L3 is not changed.
+for element in obj:
+    print(element)
+
+s = 'abc'
+it = iter(s)
+
+print(it)
+print(next(it))
+print(next(it))
+print(next(it))
+print(next(it)) # catch a StopIteration exception
